@@ -7,10 +7,8 @@
 	BeerDescription TEXT,
 	Cost VARCHAR(50),
 	Calories INT,
-	Availability VARCHAR(50)
-	constraint fk_beer_brewery
-		foreign key (BreweryID)
-		REFERENCES Brewery (id)
+	Availability VARCHAR(50),
+	FOREIGN KEY (BreweryID) REFERENCES Brewery (id)
 );
 insert into Beer (id, BreweryID, Name, ABV, IBU, BeerDescription, Cost, Calories, Availability) values (1, 1, 'Geneviève', 5.85, 68, 'sed interdum venenatis turpis enim blandit mi in porttitor pede justo eu massa donec dapibus duis at velit eu est congue elementum in hac habitasse platea dictumst', '$6.74', 84, true);
 insert into Beer (id, BreweryID, Name, ABV, IBU, BeerDescription, Cost, Calories, Availability) values (2, 2, 'Médiamass', 6.76, 20, 'penatibus et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis parturient montes nascetur', '$6.80', 7, true);

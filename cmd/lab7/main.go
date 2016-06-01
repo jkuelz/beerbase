@@ -101,7 +101,7 @@ func main() {
 		c.Data(http.StatusOK, "text/html", []byte(table))
 	})
 
-	router.GET("/query2", func(c *gin.Context) {
+	router.GET("/beer", func(c *gin.Context) {
 		table := "<table class='table'><thead><tr>"
 		// put your query here
 		rows, err := db.Query("SELECT * FROM table1") // <--- EDIT THIS LINE
