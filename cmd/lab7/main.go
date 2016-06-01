@@ -55,7 +55,7 @@ func main() {
 		}
 	})
 
-	router.GET("/query1", func(c *gin.Context) {
+	router.GET("/user", func(c *gin.Context) {
 		q := c.Request.URL.Query()
     userid := q["id"][0]
 		table := "<table class='table'>"+userid+"<thead><tr>"
