@@ -20,6 +20,12 @@ $(function(){
         $("#firstQuery").append(data);
     }, "html")
 
+    // $.get("/login?user="+$.urlParam('user')+"&pass="+$.urlParam('pass'), function(data){
+    //   var user = $.urlParam('user');
+    //   var pass = $.urlParam('pass')
+    //     $("#firstQuery").append(data);
+    // }, "html")
+
     $.get("/query2", function(data){
         $("#secondQuery").append(data);
     }, "html")
