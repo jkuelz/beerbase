@@ -9,7 +9,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	
+	"strconv"
 
 	// this allows us to run our web server
 	"github.com/gin-gonic/gin"
@@ -57,7 +57,7 @@ func main() {
 
 	router.GET("/query1", func(c *gin.Context) {
     userid := c.Param("id")
-		table := userid+ "<table class='table'><thead><tr>"
+		table := strconv.Itoa(userid)+ "<table class='table'><thead><tr>"
 		// put your query here
 		rows, err := db.Query("SELECT * FROM usert ") // <--- EDIT THIS LINE
 		if err != nil {
