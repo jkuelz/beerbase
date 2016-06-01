@@ -56,9 +56,10 @@ func main() {
 	})
 
 	router.GET("/query1", func(c *gin.Context) {
-		table := "<table class='table'><thead><tr>"
+    userid := c.Param("id")
+		table := userid+ "<table class='table'><thead><tr>"
 		// put your query here
-		rows, err := db.Query("SELECT * FROM usert") // <--- EDIT THIS LINE
+		rows, err := db.Query("SELECT * FROM usert ") // <--- EDIT THIS LINE
 		if err != nil {
 			// careful about returning errors to the user!
 			c.AbortWithError(http.StatusInternalServerError, err)
@@ -68,9 +69,9 @@ func main() {
 		if len(cols) == 0 {
 			c.AbortWithStatus(http.StatusNoContent)
 		}
-		for _, value := range cols {
-			table += "<th class='text-center'>" + value + "</th>"
-		}
+		// for _, value := range cols {
+		// 	table += "<th class='text-center'>" + value + "</th>"
+		// }
 		// once you've added all the columns in, close the header
 		table += "</thead><tbody>"
 		// declare all your RETURNED columns here
@@ -87,9 +88,9 @@ func main() {
 			// preface each variable with &
 			rows.Scan(&id,&firstName,&lastName,&birthdate,&gender,&biography,&email) // <--- EDIT THIS LINE
 			// can't combine ints and strings in Go. Use strconv.Itoa(int) instead
-			table += "<tr><td>" + strconv.Itoa(id) + "</td><td>"+ firstName +"</td><td>"+ lastName +"</td><td>"+ birthdate +"</td><td>"+ gender +"</td><td>"+ biography +"</td><td>"+ email +"</td></tr>" // <--- EDIT THIS LINE
+			// table += "<tr><td>" + strconv.Itoa(id) + "</td><td>"+ firstName +"</td><td>"+ lastName +"</td><td>"+ birthdate +"</td><td>"+ gender +"</td><td>"+ biography +"</td><td>"+ email +"</td></tr>" // <--- EDIT THIS LINE
 		}
-		table = "<tr><td>Name:"+firstName + " " + lastName+"</td><td></td></tr>"
+		table += "<tr><td>Name: "+firstName + " " + lastName+" was born on " +birthdate+ "</td></tr>"
 		// finally, close out the body and table
 		table += "</tbody></table>"
 		c.Data(http.StatusOK, "text/html", []byte(table))
