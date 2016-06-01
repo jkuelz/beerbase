@@ -58,7 +58,7 @@ func main() {
 	router.GET("/user", func(c *gin.Context) {
 		q := c.Request.URL.Query()
     userid := q["id"][0]
-		if(userod == null) {
+		if(userid == null) {
 			table := "NO USER ID SELECTED JULIAN"
 			c.Data(http.StatusOK, "text/html", []byte(table))
 		}
