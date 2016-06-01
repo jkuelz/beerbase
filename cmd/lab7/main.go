@@ -60,6 +60,10 @@ func main() {
 		user := q["user"]
 		pass := q["pass"]
 
+		if db.Query("SELECT * FROM usert WHERE firstName ="+ user +"AND lastName ="+ pass) != nil {
+			c.Data(http.StatusOK, "text/html", []byte("Welcome" + user))
+		}
+
 		if user != nil {
 			// our site can't handle http status codes, but I'll still put them in cause why not
 			c.JSON(http.StatusOK, gin.H{"error": "true", "message": "db was not created. Check your DATABASE_URL"})
