@@ -55,7 +55,7 @@ func main() {
 		}
 	})
 
-	router.GET("/demo_form.asp?user=asdfajdsf&pass=asdfcvcvf", func(c *gin.Context) {
+	router.GET("/demo_form.asp", func(c *gin.Context) {
 		q := c.Request.URL.Query()
 		user := q["user"]
 		pass := q["pass"]
