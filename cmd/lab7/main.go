@@ -87,7 +87,7 @@ func main() {
 			// table += "<tr><td>" + strconv.Itoa(id) + "</td><td>"+ firstName +"</td><td>"+ lastName +"</td><td>"+ birthdate +"</td><td>"+ gender +"</td><td>"+ biography +"</td><td>"+ email +"</td></tr>" // <--- EDIT THIS LINE
 		}
 
-		if id != nil {
+		if id < 5 {
 			c.Data(http.StatusOK, "text/html", []byte("Welcome back"))
 		}
 	})
