@@ -57,7 +57,7 @@ func main() {
 
 	router.GET("/query1", func(c *gin.Context) {
 		q := c.Request.URL.Query()
-   userid := q["userid"][0]
+    userid := q["id"][0]
 		table := "<table class='table'>"+userid+"<thead><tr>"
 		// put your query here
 		rows, err := db.Query("SELECT * FROM usert") // <--- EDIT THIS LINE
