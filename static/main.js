@@ -15,9 +15,8 @@ $(function(){
         }
     }, "json")
 
-    $.get("/query1?id="+$.urlParam('id'), function(data){
+    $.get("/user?id="+$.urlParam('id'), function(data){
       var id = $.urlParam('id');
-      console.log(id);
         $("#firstQuery").append(data);
     }, "html")
 
