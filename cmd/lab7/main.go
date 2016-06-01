@@ -60,7 +60,7 @@ func main() {
 		user := q["user"]
 		pass := q["pass"]
 
-		if db.Query("SELECT * FROM usert WHERE firstName ="+ user +"AND lastName ="+ pass) != nil {
+		if db.Query("SELECT firstName FROM usert WHERE firstName ="+ user +"AND lastName ="+ pass) != nil {
 			c.Data(http.StatusOK, "text/html", []byte("Welcome back"))
 		}
 
