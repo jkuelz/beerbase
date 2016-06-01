@@ -59,7 +59,7 @@ func main() {
     userid := c.Param("id")
 		table := "<table class='table'><thead><tr>"
 		// put your query here
-		rows, err := db.Query("SELECT * FROM usert WHERE id = " userid) // <--- EDIT THIS LINE
+		rows, err := db.Query("SELECT * FROM usert WHERE id = " + userid) // <--- EDIT THIS LINE
 		if err != nil {
 			// careful about returning errors to the user!
 			c.AbortWithError(http.StatusInternalServerError, err)
