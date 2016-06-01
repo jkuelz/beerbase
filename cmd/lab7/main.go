@@ -55,13 +55,9 @@ func main() {
 		}
 	})
 
-	router.GET("/user", func(c *gin.Context) {
+	router.GET("/query1", func(c *gin.Context) {
 		q := c.Request.URL.Query()
     userid := q["id"][0]
-		// if userid == q["id"][0] {
-		// 	table := "NO USER ID SELECTED JULIAN"
-		// 	c.Data(http.StatusOK, "text/html", []byte(table))
-		// }
 		table := "<table class='table'>"+userid+"<thead><tr>"
 		// put your query here
 		rows, err := db.Query("SELECT * FROM usert") // <--- EDIT THIS LINE
