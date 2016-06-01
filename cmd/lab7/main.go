@@ -58,10 +58,10 @@ func main() {
 	router.GET("/user", func(c *gin.Context) {
 		q := c.Request.URL.Query()
     userid := q["id"][0]
-		if userid == 0 {
-			c.Data(http.StatusOK, "text/html", []byte("JULIAN, USER ID, please"))
-
-		}
+		// if userid == 0 {
+		// 	c.Data(http.StatusOK, "text/html", []byte("JULIAN, USER ID, please"))
+		//
+		// }
 		table := "<table class='table'>"+userid+"<thead><tr>"
 		// put your query here
 		rows, err := db.Query("SELECT * FROM usert WHERE id = " + userid) // <--- EDIT THIS LINE
