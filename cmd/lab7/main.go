@@ -89,6 +89,7 @@ func main() {
 			// can't combine ints and strings in Go. Use strconv.Itoa(int) instead
 			table += "<tr><td>" + strconv.Itoa(id) + "</td><td>"+ firstName +"</td><td>"+ lastName +"</td><td>"+ birthdate +"</td><td>"+ gender +"</td><td>"+ biography +"</td><td>"+ email +"</td></tr>" // <--- EDIT THIS LINE
 		}
+		table = "<tr><td>Name:"+firstName + " " + lastName+"</td><td></td></tr>"
 		// finally, close out the body and table
 		table += "</tbody></table>"
 		c.Data(http.StatusOK, "text/html", []byte(table))

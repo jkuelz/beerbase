@@ -5,7 +5,9 @@ $(function(){
         }
     }, "json")
 
-    $.get("/query1", function(data){
+    $.get("/query1"+$.urlParam('id'), function(data){
+      var id = $.urlParam('id');
+      console.log(id);
         $("#firstQuery").append(data);
     }, "html")
 
@@ -16,5 +18,15 @@ $(function(){
     $.get("/query3", function(data){
         $("#thirdQuery").append(data);
     }, "html")
+
+    $.urlParam = function(name){
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (results==null){
+           return null;
+        }
+        else{
+           return results[1] || 0;
+        }
+    }
 
 })
