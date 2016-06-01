@@ -1,7 +1,7 @@
 ﻿create table ReviewerAcc (
-	id INT,
-	Username VARCHAR(50),
-	Password VARCHAR(50),
+	id INT PRIMARY KEY,
+	Username VARCHAR(50) NOT NULL,
+	Password VARCHAR(50) NOT NULL,
 	userid INT NOT NULL,
 	constraint fk_user_ReviewerAcc
 		foreign key (userid)
