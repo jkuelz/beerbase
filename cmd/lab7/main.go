@@ -57,9 +57,9 @@ func main() {
 
 	router.GET("/query1", func(c *gin.Context) {
     userid := c.Param("id")
-		table := strconv.Itoa(userid)+ "<table class='table'><thead><tr>"
+		table := "<table class='table'><thead><tr>"
 		// put your query here
-		rows, err := db.Query("SELECT * FROM usert ") // <--- EDIT THIS LINE
+		rows, err := db.Query("SELECT * FROM usert WHERE id = " userid) // <--- EDIT THIS LINE
 		if err != nil {
 			// careful about returning errors to the user!
 			c.AbortWithError(http.StatusInternalServerError, err)
