@@ -9,7 +9,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strconv"
 
 	// this allows us to run our web server
 	"github.com/gin-gonic/gin"
@@ -45,7 +44,7 @@ func getFeaturedBeer() []Beer {
 		// we need &loc.xxx so that scan can update the properties in memory (&loc.Name means address of the Name property for this instance of loc)
 		err = rows.Scan(&beer.Id, &beer.Name, &beer.BeerDescription)
 		if err != nil {
-			return
+			return nil
 		}
 		// append each intermediate loc to our array
 		beerArray = append(beerArray, beer)
