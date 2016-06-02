@@ -10,6 +10,9 @@ h1 {
   font-size: 16px;
 }
 
+.jumbotron {
+  background-image: url(../img/background.jpg);
+}
 
 .content {
     background-color: #EAFDF8;
