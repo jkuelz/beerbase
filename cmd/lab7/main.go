@@ -22,7 +22,8 @@ var (
 	// this is a "global" variable (sorta kinda, but you can use it as such)
 	db *sql.DB
 )
-type Beer {
+
+type Beer struct {
   Id string
 	Name string
 	BeerDescription string
