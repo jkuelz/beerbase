@@ -30,7 +30,7 @@ type Beer struct {
 }
 
 func getFeaturedBeer() []Beer {
-	beerArray []Beer
+	var beerArray []Beer
 	rows, err := Db.Query("Select id, name, beerdescription from beer order by random() limit 3")
 	if err != nil {
 		return nil
