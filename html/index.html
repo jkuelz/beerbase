@@ -53,7 +53,7 @@
       <div class="container">
       <!-- Example row of columns -->
       <div class="row">
-        {{ range . }}
+        {{ range .Favorites }}
         <div class="col-md-4" id="{{ .Id }}">
           <h2>{{ .Name }}</h2>
           <p>{{ .BeerDescription }} </p>
