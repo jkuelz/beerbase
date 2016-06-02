@@ -54,7 +54,7 @@
       <!-- Example row of columns -->
       <div class="row">
         {{ range . }}
-        <div class="col-md-4" id="firstQuery">
+        <div class="col-md-4" id="{{ .Id }}">
           <h2>{{ .Name }}</h2>
           <p>{{ .BeerDescription }} </p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>

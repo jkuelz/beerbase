@@ -28,6 +28,12 @@ type Beer struct {
 	BeerDescription string
 }
 
+type Review struct {
+	Id string
+	Author string
+	Content string
+}
+
 func getFeaturedBeer() []Beer {
 	var beerArray []Beer
 	rows, err := db.Query("Select id, name, beerdescription from beer order by random() limit 3")
@@ -54,9 +60,30 @@ func getFeaturedBeer() []Beer {
 	return beerArray
 }
 
+// func beerHandler(c *gin.Context) {
+// 	beerName := c.Param("id")
+// 	beerDetail := getBeerDetails(beerName)
+// 	context := struct {
+// 		Detail Beer `json:"detail"`
+//
+// 	}{
+// 		beerDetail,
+// 	}
+// 	c.JSON(200,context)
+// }
+
 func indexHandler(c *gin.Context) {
 	favoriteBeers := getFeaturedBeer()
-	c.HTML(http.StatusOK, "index.html", favoriteBeers)
+
+	context := struct {
+		Favorites []Beer
+		// Reviews []Review
+
+	}{
+		favoriteBeers,
+		// topReviews,
+	}
+	c.HTML(http.StatusOK, "index.html", context)
 }
 
 func main() {
