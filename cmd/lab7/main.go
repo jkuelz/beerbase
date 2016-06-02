@@ -86,7 +86,7 @@ func main() {
 		} else {
 			c.JSON(http.StatusOK, gin.H{"error": "false", "message": "db created"})
 		}
-	})
+	}
 
 	router.GET("/user", func(c *gin.Context) {
 		q := c.Request.URL.Query()
