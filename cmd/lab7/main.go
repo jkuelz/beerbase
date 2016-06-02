@@ -22,12 +22,46 @@ var (
 	// this is a "global" variable (sorta kinda, but you can use it as such)
 	db *sql.DB
 )
+type Beer {
+  Id string
+	Name string
+	BeerDescription string
+}
 
+func getFeaturedBeer() []Beer {
+	beerArray []Beer
+	rows, err := Db.Query("Select id, name, beerdescription from beer order by random() limit 3")
+	if err != nil {
+		return nil
+	}
+
+	for rows.Next() {
+		// for each row, we create an empty Location object
+
+		var beer Beer
+
+		// go can scan the columns returned from the select directly into the properties from our object
+		// we need &loc.xxx so that scan can update the properties in memory (&loc.Name means address of the Name property for this instance of loc)
+		err = rows.Scan(&beer.Id, &beer.Name, &beer.BeerDescription)
+		if err != nil {
+			return
+		}
+		// append each intermediate loc to our array
+		beerArray = append(beerArray, beer)
+	}
+	rows.Close()
+
+	return beerArray
+}
+
+func indexHandler(c *gin.Context) {
+	favoriteBeers := getFeaturedBeer()
+	c.HTML(http.StatusOK, "index.html", favoriteBeers)
+}
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		log.Fatal("$PORT must be set")
-	}
 
 	var errd error
 	// here we want to open a connection to the database using an environemnt variable.
@@ -41,9 +75,7 @@ func main() {
 	router.LoadHTMLGlob("html/*")
 	router.Static("/static", "static")
 
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.html", nil)
-	})
+	router.GET("/", indexHandler)
 
 	router.GET("/ping", func(c *gin.Context) {
 		ping := db.Ping()
