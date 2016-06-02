@@ -31,7 +31,7 @@ type Beer struct {
 
 func getFeaturedBeer() []Beer {
 	var beerArray []Beer
-	rows, err := Db.Query("Select id, name, beerdescription from beer order by random() limit 3")
+	rows, err := db.Query("Select id, name, beerdescription from beer order by random() limit 3")
 	if err != nil {
 		return nil
 	}
@@ -64,7 +64,7 @@ func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		log.Fatal("$PORT must be set")
-}
+  }
 	var errd error
 	// here we want to open a connection to the database using an environemnt variable.
 	// This isn't the best technique, but it is the simplest one for heroku
