@@ -28,7 +28,7 @@ $(function(){
 
     $.get("/query2", function(data){
         $("#secondQuery").append(data);
-    }, "data/Beer.sql")
+    }, "html")
 
     $.get("/query3", function(data){
         $("#thirdQuery").append(data);

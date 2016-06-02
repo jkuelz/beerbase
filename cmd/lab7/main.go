@@ -101,10 +101,10 @@ func main() {
 		c.Data(http.StatusOK, "text/html", []byte(table))
 	})
 
-	router.GET("/beer", func(c *gin.Context) {
+	router.GET("/query2", func(c *gin.Context) {
 		table := "<table class='table'><thead><tr>"
 		// put your query here
-		rows, err := db.Query("SELECT * FROM table1") // <--- EDIT THIS LINE
+		rows, err := db.Query("SELECT BeerID, MAX (avg_rating) FROM (SELECT BeerID, AVG (rating) AS avg_rating FROM Review) AS topBeer GROUP BY BeerID") // <--- EDIT THIS LINE
 		if err != nil {
 			// careful about returning errors to the user!
 			c.AbortWithError(http.StatusInternalServerError, err)
@@ -119,10 +119,14 @@ func main() {
 		}
 		// once you've added all the columns in, close the header
 		table += "</thead><tbody>"
-		// columns
+		// RETURNED columns
+		var Name string
+		var BeerDescription string
+
+		// assign each of them, in order, to the parameters of rows.Scan().
 		for rows.Next() {
-			// rows.Scan() // put columns here prefaced with &
-			table += "<tr><td></td></tr>" // <--- EDIT THIS LINE
+			 rows.Scan(&Name,&BeerDescription) // put columns here prefaced with &
+			table += "<tr><td>"+Name+"</td></tr><tr><td>"+BeerDescription+"</td></tr>" // <--- EDIT THIS LINE
 		}
 		// finally, close out the body and table
 		table += "</tbody></table>"
