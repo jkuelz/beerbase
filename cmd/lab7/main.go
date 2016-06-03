@@ -191,3 +191,7 @@ router.GET("/EXAMPLE", func(c *gin.Context) {
 })
 
 */
+func hasIllegalSyntax(s string) bool {
+	s = strings.ToUpper(s)
+	return strings.Contains(s, "INSERT") || strings.Contains(s, "DELETE") || strings.Contains(s, "CREATE") || strings.Contains(s, "DROP") || strings.Contains(s, "UPDATE") || strings.Contains(s, "ALTER")
+}
