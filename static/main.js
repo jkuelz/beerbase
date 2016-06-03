@@ -9,16 +9,16 @@
         }
     }
 $(function(){
-    $.get("/ping", function(data){
-        if(data.error == "true"){
-            $("#results").prepend("<div class='alert alert-danger'><strong>Error!</strong> "+ data.message +"</div>");
-        }
-    }, "json")
-
-    $.get("/user?id="+$.urlParam('id'), function(data){
-      var id = $.urlParam('id');
-        $("#firstQuery").append(data);
-    }, "html")
+    // $.get("/ping", function(data){
+    //     if(data.error == "true"){
+    //         $("#results").prepend("<div class='alert alert-danger'><strong>Error!</strong> "+ data.message +"</div>");
+    //     }
+    // }, "json")
+// user param
+    // $.get("/user?id="+$.urlParam('id'), function(data){
+    //   var id = $.urlParam('id');
+    //     $("#firstQuery").append(data);
+    // }, "html")
 
     // $.get("/login?user="+$.urlParam('user')+"&pass="+$.urlParam('pass'), function(data){
     //   var user = $.urlParam('user');
@@ -36,24 +36,23 @@ $(function(){
     //   })
     // }
 
-    function submitreview() {
-      $.post("/addtrip, {rating: $(#rating).val(), description: $(#ReviewDescription).val()}")
-      .done(function(data)){
-        console.log(data);
-      }
-    }
+    // $.get("/ping", function(data){
+    //     if(data.error == "true"){
+    //         $("#results").prepend("<div class='alert alert-danger'><strong>Error!</strong> "+ data.message +"</div>");
+    //     }
+    // }, "json")
+    $("#login").click(function(){
+      $.post("/login", {email: $("#email").val(), password: $("#password").val()})
+        .done(function(data){
+          if(data.result == "failed"){
+            console.log(data)
+            $("#result").text("Failed to login! " + data.message);
+          } else {
+            console.log(data)
+            $("#result").text("Logged in as: " + data.email + ":" + data.password)
+          }
 
-    $("#submitreview").click(function(){
-      submitreview();
-    })
+        });
 
-    $.get("/query2", function(data){
-        $("#secondQuery").append(data);
-    }, "html")
-
-    $.get("/query3", function(data){
-        $("#thirdQuery").append(data);
-    }, "html")
-
-
+    });
 })

@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	// this allows us to run our web server
 	"github.com/gin-gonic/gin"
@@ -34,18 +35,6 @@ type Review struct {
 	ReviewDescription string
 	ReviewDate string
 }
-
-// // Example for binding JSON ({"user": "manu", "password": "123"})
-//     router.POST("/loginJSON", func(c *gin.Context) {
-//         var json Login
-//         if c.BindJSON(&json) == nil {
-//             if json.User == "manu" && json.Password == "123" {
-//                 c.JSON(http.StatusOK, gin.H{"status": "you are logged in"})
-//             } else {
-//                 c.JSON(http.StatusUnauthorized, gin.H{"status": "unauthorized"})
-//             }
-//         }
-//     })
 
 func getFeaturedBeer() []Beer {
 	var beerArray []Beer
@@ -150,7 +139,17 @@ func main() {
 	router.Static("/static", "static")
 
 	router.GET("/", indexHandler)
+	// Example for binding JSON ({"user": "manu", "password": "123"})
+	    router.POST("/login", func(c *gin.Context) {
+				email := c.PostForm("email")
+				password := c.PostForm("password")
 
+				if hasIllegalSyntax(email) || hasIllegalSyntax(password) {
+					c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Don't use syntax that isn't allowed"})
+					return
+				}
+				c.JSON(http.StatusOK, gin.H{"email":email, "password":password})
+	    })
 	// router.POST("/addreview", func(c *gin.Context) {
 	// 		user := c.PostForm("ReviewerID")
 	// 		beer := c.PostForm("BeerID")
@@ -193,3 +192,7 @@ router.GET("/EXAMPLE", func(c *gin.Context) {
 })
 
 */
+func hasIllegalSyntax(s string) bool {
+	s = strings.ToUpper(s)
+	return strings.Contains(s, "INSERT") || strings.Contains(s, "DELETE") || strings.Contains(s, "CREATE") || strings.Contains(s, "DROP") || strings.Contains(s, "UPDATE") || strings.Contains(s, "ALTER")
+}
