@@ -89,7 +89,7 @@ func indexHandler(c *gin.Context) {
 
 	context := struct {
 		Favorites []Beer
-		//Reviews []Review
+		//AllReviews []Review
 
 	}{
 		favoriteBeers,
@@ -137,8 +137,8 @@ func main() {
 	// 		})
 	// })
 
-	// func getReviews() []Reviews {
-	// 	var reviewArray []Reviews
+	// func getReviews() []AllReviews {
+	// 	var reviewsArray []AllReviews
 	// 	rows, err := db.Query("SELECT ID, Author, Content from Reviews order by date()")
 	// 	if err != nil {
 	// 		return nil
@@ -151,16 +151,16 @@ func main() {
 	//
 	// 		// go can scan the columns returned from the select directly into the properties from our object
 	// 		// we need &loc.xxx so that scan can update the properties in memory (&loc.Name means address of the Name property for this instance of loc)
-	// 		err = rows.Scan(&review.id, &review.Name, &beer.BeerDescription)
+	// 		err = rows.Scan(&review.id, &review.ReviewDescription)
 	// 		if err != nil {
 	// 			return nil
 	// 		}
 	// 		// append each intermediate loc to our array
-	// 		reviewArray = append(reviewArray, review)
+	// 		reviewsArray = append(reviewsArray, review)
 	// 	}
 	// 	rows.Close()
 	//
-	// 	return reviewArray
+	// 	return reviewsArray
 	// }
 
 
