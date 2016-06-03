@@ -73,8 +73,8 @@ func getFeaturedBeer() []Beer {
 	return beerArray
 }
 
-func getReviews() []Reviews {
-	var reviewsArray []Reviews
+func getReviews() []Review {
+	var reviewsArray []Review
 	rows, err := db.Query("SELECT rating, ReviewDescription, ReviewDate from Reviews order by ReviewDate DESC")
 	if err != nil {
 		return nil
@@ -83,7 +83,7 @@ func getReviews() []Reviews {
 	for rows.Next() {
 		// for each row, we create an empty Location object
 
-		var review Reviews
+		var review Review
 
 		// go can scan the columns returned from the select directly into the properties from our object
 		// we need &loc.xxx so that scan can update the properties in memory (&loc.Name means address of the Name property for this instance of loc)
