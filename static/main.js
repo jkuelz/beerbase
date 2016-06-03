@@ -28,7 +28,7 @@ $(function(){
 
     $("#submitReview").click(function(){
       submitReview();
-    });
+    })
 
     // $.get("/ping", function(data){
     //     if(data.error == "true"){
@@ -51,7 +51,7 @@ $(function(){
     function submitReview() {
       $.post("/addreview", {title: $("#Title").val(), rating: $("#Rating").val(), description: $("#ReviewDescription").val()})
       .done(function(data){
-          console.log(data);
-      });
+          console.log(data)
+      })
     }
 })
