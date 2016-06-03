@@ -61,19 +61,23 @@ $(function(){
             $("#results").prepend("<div class='alert alert-danger'><strong>Error!</strong> "+ data.message +"</div>");
         }
     }, "json")
-
+  $(document).ready(function() {
     $("#login").click(function(){
       $.post("/login", {email: $("#email").val(), password: $("#password").val()})
         .done(function(data){
           if(data.result == "failed"){
             console.log(data)
-            $("#result"+index).text("Failed to login! " + data.message);
+            $("#result").text("Failed to login! " + data.message);
           } else {
             console.log(data)
-            $("#result"+index).text("Logged in as: " + data.username + (data.randomCode ? " (CODE: " + data.randomCode + ")" : ""));
+            $("#result").text("Logged in as: " + data.username + (data.randomCode ? " (CODE: " + data.randomCode + ")" : ""));
           }
+
         });
+
     });
+  })
+
 
 })
 
