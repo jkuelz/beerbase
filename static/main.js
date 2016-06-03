@@ -27,15 +27,11 @@ $(function(){
     // }, "html")
 
     $("#submitreview").click(function(){
-<<<<<<< HEAD
-      submitReview();
-=======
       // submitReview();
       $.post("/addreview", {rating: $("#rating").val(), title: $("#title").val(), description: $("#reviewDescription").val()})
       .done(function(data){
           console.log(data)
       })
->>>>>>> 1f0654377a516f2773dc7bc53f99b8d1428636ea
     })
 
     $.get("/ping", function(data){
@@ -57,19 +53,10 @@ $(function(){
         });
     });
 
-<<<<<<< HEAD
-    function submitReview() {
-      $.post("/addreview", {title: $("#Title").val(), rating: $("#Rating").val(), description: $("#ReviewDescription").val()})
-      .done(function(data){
-          console.log(data)
-      })
-    }
-=======
     // function submitReview(){
     //   $.post("/addreview", {rating: $("#rating").val(), title: $("#title").val(), description: $("#reviewDescription").val()})
     //   .done(function(data){
     //       console.log(data)
     //   })
     // }
->>>>>>> 1f0654377a516f2773dc7bc53f99b8d1428636ea
 })
