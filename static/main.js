@@ -52,6 +52,6 @@ $(function(){
       $.post("/addreview", {title: $("#Title").val(), rating: $("#Rating").val(), description: $("#ReviewDescription").val()})
       .done(function(data){
           console.log(data);
-      });
+      })
     }
 })
