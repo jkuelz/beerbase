@@ -36,6 +36,13 @@ type Review struct {
 	ReviewDate string
 }
 
+type User struct {
+	Id string
+	Username string
+	Password string
+	Userid string
+}
+
 func getFeaturedBeer() []Beer {
 	var beerArray []Beer
 	rows, err := db.Query("Select id, name, beerdescription from beer order by random() limit 3")
@@ -60,6 +67,32 @@ func getFeaturedBeer() []Beer {
 	rows.Close()
 
 	return beerArray
+}
+
+func getReviewerAccs() []User {
+	var userArray []User
+	rows, err := db.Query("Select * from ReviewerAcc")
+	if err != nil {
+		return nil
+	}
+
+	for rows.Next() {
+		// for each row, we create an empty Location object
+
+		var user User
+
+		// go can scan the columns returned from the select directly into the properties from our object
+		// we need &loc.xxx so that scan can update the properties in memory (&loc.Name means address of the Name property for this instance of loc)
+		err = rows.Scan(&user.Id, &user.Username, &user.Password, &user.Userid)
+		if err != nil {
+			return nil
+		}
+		// append each intermediate loc to our array
+		userArray = append(userArray, user)
+	}
+	rows.Close()
+
+	return userArray
 }
 
 func getReviews() []Review {
@@ -141,14 +174,26 @@ func main() {
 	router.GET("/", indexHandler)
 	// Example for binding JSON ({"user": "manu", "password": "123"})
 	    router.POST("/login", func(c *gin.Context) {
-				email := c.PostForm("email")
+				username := c.PostForm("username")
 				password := c.PostForm("password")
 
-				if hasIllegalSyntax(email) || hasIllegalSyntax(password) {
+				if hasIllegalSyntax(username) || hasIllegalSyntax(password) {
 					c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Don't use syntax that isn't allowed"})
 					return
 				}
-				c.JSON(http.StatusOK, gin.H{"email":email, "password":password})
+				userArray := getReviewerAccs()
+				var isAccount bool = false
+				for index, user := range userArray {
+					if (username == user.Username) && (password == user.Password) {
+						isAccount := true
+					}
+				}
+				if isAccount{
+					c.JSON(http.StatusOK, gin.H{"username":username, "password":password})
+				}
+				else{
+					c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Failed username password combination"})
+				}
 	    })
 	// router.POST("/addreview", func(c *gin.Context) {
 	// 		user := c.PostForm("ReviewerID")

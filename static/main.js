@@ -42,7 +42,7 @@ $(function(){
     //     }
     // }, "json")
     $("#login").click(function(){
-      $.post("/login", {email: $("#email").val(), password: $("#password").val()})
+      $.post("/login", {username: $("#username").val(), password: $("#password").val()})
         .done(function(data){
           if(data.result == "failed"){
             console.log(data)
