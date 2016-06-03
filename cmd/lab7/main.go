@@ -190,8 +190,7 @@ func main() {
 				}
 				if isAccount{
 					c.JSON(http.StatusOK, gin.H{"username":username, "password":password})
-				}
-				else{
+				} else {
 					c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Failed username password combination"})
 				}
 	    })
