@@ -78,9 +78,9 @@
         <div id="oldReviews"></div><br>
         {{ range .Reviews }}
         <div class="reviewRows" id="{{ .Id }}">
-          <h3>{{ .ReviewDate }}</h3>
-          <h3>{{ .Rating }}<h3>
-          <p>{{ .ReviewDescription }} </p>
+          <h3>{{ .ReviewDate }}Date</h3>
+          <h3>{{ .Rating }}Rating<h3>
+          <p>{{ .ReviewDescription }}Description</p>
         </div>
         {{ end }}
     </div>
