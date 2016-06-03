@@ -28,7 +28,7 @@ $(function(){
 
     $("#submitReview").click(function(){
       submitReview();
-    });
+    })
 
     // $.get("/ping", function(data){
     //     if(data.error == "true"){
