@@ -35,7 +35,7 @@ $(function(){
             $("#results").prepend("<div class='alert alert-danger'><strong>Error!</strong> "+ data.message +"</div>");
         }
     }, "json")
-    
+
     $("#login").click(function(){
       $.post("/login", {username: $("#username").val(), password: $("#password").val()})
         .done(function(data){
@@ -50,7 +50,7 @@ $(function(){
     });
 
     function submitReview() {
-      $.post("/addreview", {title: $("#Title").val(), Rating: $("#Rating").val(), reviewdescription: $("#ReviewDescription").val()})
+      $.post("/addreview", {title: $("#Title").val(), rating: $("#Rating").val(), description: $("#ReviewDescription").val()})
       .done(function(data){
           console.log(data)
       })
