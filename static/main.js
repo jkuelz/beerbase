@@ -9,11 +9,11 @@
         }
     }
 $(function(){
-    // $.get("/ping", function(data){
-    //     if(data.error == "true"){
-    //         $("#results").prepend("<div class='alert alert-danger'><strong>Error!</strong> "+ data.message +"</div>");
-    //     }
-    // }, "json")
+    $.get("/ping", function(data){
+        if(data.error == "true"){
+            $("#results").prepend("<div class='alert alert-danger'><strong>Error!</strong> "+ data.message +"</div>");
+        }
+    }, "json")
 // user param
     // $.get("/user?id="+$.urlParam('id'), function(data){
     //   var id = $.urlParam('id');
@@ -26,8 +26,12 @@ $(function(){
     //     $("#firstQuery").append(data);
     // }, "html")
 
-    $("#submitReview").click(function(){
-      submitReview();
+    $("#submitreview").click(function(){
+      // submitReview();
+      $.post("/addreview", {rating: $("#rating").val(), title: $("#title").val(), description: $("#reviewDescription").val()})
+      .done(function(data){
+          console.log(data)
+      })
     })
 
     // $.get("/ping", function(data){
@@ -48,10 +52,10 @@ $(function(){
         });
     });
 
-    function submitReview() {
-      $.post("/addreview", {title: $("#Title").val(), Rating: $("#Rating").val(), reviewdescription: $("#ReviewDescription").val()})
-      .done(function(data){
-          console.log(data)
-      })
-    }
+    // function submitReview(){
+    //   $.post("/addreview", {rating: $("#rating").val(), title: $("#title").val(), description: $("#reviewDescription").val()})
+    //   .done(function(data){
+    //       console.log(data)
+    //   })
+    // }
 })

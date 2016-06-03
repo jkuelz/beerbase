@@ -12,7 +12,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
         <link rel="stylesheet" href="static/main.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
-        <script src="static/main.js"></script>
     </head>
 
     <body>
@@ -32,7 +31,7 @@
               <input type="text" class="form-control" id="username" placeholder="Username" />
               <input type="password" class="form-control" id="password" placeholder="Password"/>
               <button class="btn" id="login">Log in</button>
-              <span id="result"></span>
+              <p style="color: whitesmoke" id="result"></p>
             </div>
           </div><!--/.navbar-collapse -->
         </div>
@@ -64,11 +63,19 @@
         <div id="createReview" class="container">
             <h2>Create a review for this beer:</h2>
             <form id="reviewForm">
-                <input class="formInput form-group" type="text" id="Title" autocorrect="off" placeholder="Title of your review"><br>
-                <input class="formInput form-group" type="text" id="Rating" autocorrect="off" placeholder="Rating of your review"><br>
-
-                <div id="star"></div><br>
-                <textarea class="formInput form-group" id="ReviewDescription" rows="3" placeholder="Review description..."></textarea><br>
+                <input class="formInput form-group" type="text" id="title" autocorrect="off" placeholder="Title of your review"><br>
+                <fieldset class="form-group formInput">
+                    <label for="rating">Rating</label>
+                    <select class="form-control" id="rating">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </fieldset>
+                <!-- <input class="formInput form-group" type="text" id="Rating" autocorrect="off" placeholder="Rating of your review"><br> -->
+                <textarea class="formInput form-group" id="reviewDescription" rows="3" placeholder="Review description..."></textarea><br>
                 <button class="btn btn-info" id="submitreview" type="submit">Submit</button>
             </form>
         </div>
@@ -93,6 +100,11 @@
         <p>&copy; 2016 BeerBase, Inc.</p>
       </footer>
     </div> <!-- /container -->
+
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="static/main.js"></script>
+
   </body>
 </html>
 

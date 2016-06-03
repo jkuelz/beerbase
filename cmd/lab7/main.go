@@ -177,6 +177,21 @@ func main() {
 	router.Static("/static", "static")
 
 	router.GET("/", indexHandler)
+
+	// router.GET("/", func(c *gin.Context) {
+	// 	c.HTML(http.StatusOK, "index.html", nil)
+	// })
+
+	router.GET("/ping", func(c *gin.Context) {
+		ping := db.Ping()
+		if ping != nil {
+			// our site can't handle http status codes, but I'll still put them in cause why not
+			c.JSON(http.StatusOK, gin.H{"error": "true", "message": "db was not created. Contact your TA for assistance"})
+		} else {
+			c.JSON(http.StatusOK, gin.H{"error": "false", "message": "db created"})
+		}
+	})
+
 	// Example for binding JSON ({"user": "manu", "password": "123"})
 	router.POST("/login", func(c *gin.Context) {
 			username := c.PostForm("username")
@@ -223,15 +238,15 @@ func main() {
 			// }
 	})
 	router.POST("/addreview", func(c *gin.Context) {
-			title := c.PostForm("Title")
-			rating := c.PostForm("Rating")
-			description := c.PostForm("ReviewDescription")
-			_, err := db.Exec("INSERT INTO Review(id, ReviewerID, BeerID, Rating, Title, ReviewDescription, ReviewDate) VALUES((SELECT ISNULL(MAX(ID) + 1, 1) FROM Review), 1, 1, $1, $2, $3, (GETDATE()))", rating, title, description)
+			rating := c.PostForm("rating")
+			title := c.PostForm("title")
+			reviewDescription := c.PostForm("reviewDescription")
+			_, err := db.Exec("INSERT INTO Review(id, ReviewerID, BeerID, Rating, Title, ReviewDescription, ReviewDate) VALUES((SELECT (MAX(ID) + 1) FROM Review), 1, 1, $1, $2, $3, (current_date)", rating, title, reviewDescription)
 			if err != nil {
 				c.AbortWithError(http.StatusInternalServerError, errd)
 				return
 			}
-			c.JSON(http.StatusOK, gin.H{ "result":  "success", "message": "Successfully added."})
+			c.JSON(http.StatusOK, gin.H{"result":  "success", "message": "Successfully added."})
 	})
 
 
