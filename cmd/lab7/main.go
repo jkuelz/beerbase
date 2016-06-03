@@ -30,6 +30,7 @@ type Beer struct {
 
 type Review struct {
 	Id string
+	BeerName string
 	Rating string
 	ReviewDescription string
 	ReviewDate string
@@ -75,7 +76,7 @@ func getFeaturedBeer() []Beer {
 
 func getReviews() []Review {
 	var reviewsArray []Review
-	rows, err := db.Query("SELECT id, rating, reviewdescription, reviewdate from Review order by ReviewDate DESC")
+	rows, err := db.Query("SELECT id, beer.name, rating, reviewdescription, reviewdate from Review join beer on beerid = beer.id order by ReviewDate DESC")
 	if err != nil {
 		return nil
 	}
@@ -87,7 +88,7 @@ func getReviews() []Review {
 
 		// go can scan the columns returned from the select directly into the properties from our object
 		// we need &loc.xxx so that scan can update the properties in memory (&loc.Name means address of the Name property for this instance of loc)
-		err = rows.Scan(&review.Id, &review.Rating, &review.ReviewDescription, &review.ReviewDate)
+		err = rows.Scan(&review.Id, &review.BeerName, &review.Rating, &review.ReviewDescription, &review.ReviewDate)
 		if err != nil {
 			return nil
 		}
