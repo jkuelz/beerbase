@@ -55,5 +55,28 @@ $(function(){
         $("#thirdQuery").append(data);
     }, "html")
 
+    $(function(){
+    $.get("/ping", function(data){
+        if(data.error == "true"){
+            $("#results").prepend("<div class='alert alert-danger'><strong>Error!</strong> "+ data.message +"</div>");
+        }
+    }, "json")
+
+    $("#login").click(function(){
+      $.post("/login"+index, {username: $("#username").val(), password: $("#password").val()})
+        .done(function(data){
+          if(data.result == "failed"){
+            console.log(data)
+            $("#result"+index).text("Failed to login! " + data.message);
+          } else {
+            console.log(data)
+            $("#result"+index).text("Logged in as: " + data.username + (data.randomCode ? " (CODE: " + data.randomCode + ")" : ""));
+          }
+        });
+    });
+
+})
+
+
 
 })
