@@ -36,32 +36,12 @@ $(function(){
     //   })
     // }
 
-    function submitreview() {
-      $.post("/addtrip, {rating: $(#rating).val(), description: $(#ReviewDescription).val()}")
-      .done(function(data)){
-        console.log(data);
-      }
-    }
-
-    $("#submitreview").click(function(){
-      submitreview();
-    })
-
-    $.get("/query2", function(data){
-        $("#secondQuery").append(data);
-    }, "html")
-
-    $.get("/query3", function(data){
-        $("#thirdQuery").append(data);
-    }, "html")
-
-    $(function(){
+  ?    $(function(){
     $.get("/ping", function(data){
         if(data.error == "true"){
             $("#results").prepend("<div class='alert alert-danger'><strong>Error!</strong> "+ data.message +"</div>");
         }
     }, "json")
-  $(document).ready(function() {
     $("#login").click(function(){
       $.post("/login", {email: $("#email").val(), password: $("#password").val()})
         .done(function(data){
@@ -79,7 +59,6 @@ $(function(){
   })
 
 
-})
 
 
 
