@@ -26,19 +26,13 @@ $(function(){
     //     $("#firstQuery").append(data);
     // }, "html")
 
+
     $("#submitreview").click(function(){
-      // submitReview();
-      $.post("/submitreview", {rating: $("#rating").val(), title: $("#title").val(), description: $("#reviewDescription").val()})
+      $.post("/submitreview", {rating: $("#rating").val(), title: $("#title").val(), description: $("#description").val()})
       .done(function(data){
           console.log(data)
       })
     })
-
-    $.get("/ping", function(data){
-        if(data.error == "true"){
-            $("#results").prepend("<div class='alert alert-danger'><strong>Error!</strong> "+ data.message +"</div>");
-        }
-    }, "json")
 
     $("#login").click(function(){
       $.post("/login", {username: $("#username").val(), password: $("#password").val()})
