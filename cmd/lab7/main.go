@@ -30,8 +30,9 @@ type Beer struct {
 
 type Review struct {
 	Id string
-	Author string
-	Content string
+	Rating string
+	ReviewDescription string
+	ReviewDate string
 }
 
 // // Example for binding JSON ({"user": "manu", "password": "123"})
@@ -72,31 +73,31 @@ func getFeaturedBeer() []Beer {
 	return beerArray
 }
 
-// func getReviews() []AllReviews {
-// 	var reviewsArray []AllReviews
-// 	rows, err := db.Query("SELECT rating, ReviewDescription, from Reviews order by date()")
-// 	if err != nil {
-// 		return nil
-// 	}
-//
-// 	for rows.Next() {
-// 		// for each row, we create an empty Location object
-//
-// 		var review Reviews
-//
-// 		// go can scan the columns returned from the select directly into the properties from our object
-// 		// we need &loc.xxx so that scan can update the properties in memory (&loc.Name means address of the Name property for this instance of loc)
-// 		err = rows.Scan(&review.id, &review.ReviewDescription)
-// 		if err != nil {
-// 			return nil
-// 		}
-// 		// append each intermediate loc to our array
-// 		reviewsArray = append(reviewsArray, review)
-// 	}
-// 	rows.Close()
-//
-// 	return reviewsArray
-// }
+func getReviews() []AllReviews {
+	var reviewsArray []AllReviews
+	rows, err := db.Query("SELECT rating, ReviewDescription, ReviewDate from Reviews order by ReviewDate DESC")
+	if err != nil {
+		return nil
+	}
+
+	for rows.Next() {
+		// for each row, we create an empty Location object
+
+		var review Reviews
+
+		// go can scan the columns returned from the select directly into the properties from our object
+		// we need &loc.xxx so that scan can update the properties in memory (&loc.Name means address of the Name property for this instance of loc)
+		err = rows.Scan(&review.id, &review.ReviewDescription, &review.ReviewDate)
+		if err != nil {
+			return nil
+		}
+		// append each intermediate loc to our array
+		reviewsArray = append(reviewsArray, review)
+	}
+	rows.Close()
+
+	return reviewsArray
+}
 
 // func beerHandler(c *gin.Context) {
 // 	beerName := c.Param("id")
@@ -112,15 +113,15 @@ func getFeaturedBeer() []Beer {
 
 func indexHandler(c *gin.Context) {
 	favoriteBeers := getFeaturedBeer()
-  //allReviews := getReviews()
+  allReviews := getReviews()
 
 	context := struct {
 		Favorites []Beer
-		//Reviews []Review
+		Reviews []Review
 
 	}{
 		favoriteBeers,
-		//allReviews,
+		allReviews,
 	}
 	c.HTML(http.StatusOK, "index.html", context)
 }
