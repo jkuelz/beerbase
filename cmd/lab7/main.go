@@ -239,11 +239,11 @@ func main() {
 	})
 
 	router.POST("/addreview", func(c *gin.Context) {
-			fmt.printLn("starting addreview")
+			printLn("starting addreview")
 			rating := c.PostForm("rating")
 			title := c.PostForm("title")
 			reviewDescription := c.PostForm("reviewDescription")
-			fmt.println(rating + " " + title + " " + reviewDescription)
+			println(rating + " " + title + " " + reviewDescription)
 
 			_, err := db.Exec("INSERT INTO Review(id, ReviewerID, BeerID, Rating, Title, ReviewDescription, ReviewDate) VALUES((SELECT (MAX(ID) + 1) FROM Review), 1, 1, $1, $2, $3, (current_date)", rating, title, reviewDescription)
 			if err != nil {
