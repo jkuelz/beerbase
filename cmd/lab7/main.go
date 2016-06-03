@@ -73,8 +73,8 @@ func getFeaturedBeer() []Beer {
 	return beerArray
 }
 
-func getReviews() []AllReviews {
-	var reviewsArray []AllReviews
+func getReviews() []Reviews {
+	var reviewsArray []Reviews
 	rows, err := db.Query("SELECT rating, ReviewDescription, ReviewDate from Reviews order by ReviewDate DESC")
 	if err != nil {
 		return nil
