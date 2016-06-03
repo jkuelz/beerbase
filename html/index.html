@@ -61,7 +61,7 @@
         </div>
         {{ end }}
       </div>
-
+      </div>
       <hr>
 
         <div id="createReview" class="container">
@@ -74,21 +74,21 @@
             </form>
         </div>
 
-        <h1 class="reviewArchive">Previous Reviews</h1>
+        <!-- <h1 class="reviewArchive">Previous Reviews</h1> -->
 <!--        <div id="oldReviews"></div><br>-->
 
         <div id="listReview" class="container">
-            <h1> Review test </h1>
-            {{ range .Reviews }}
-            <div class="row" id="{{ .Id }}">
-              <h3>{{ .ReviewDate }} Date </h3>
-              <h3>{{ .Rating }} Rating </h3>
-              <p>{{ .ReviewDescription }} Description </p>
-            </div>
-            {{ end }}
+            <h2>Recent Reviews:</h2>
+            <table>
+              {{ range .Reviews }}
+                <tr>
+                  <th>{{ .ReviewDate }}</th>
+                  <th>{{ .Rating }}</th>
+                  <th>{{ .ReviewDescription }}</th>
+                </tr>
+              {{ end }}
+            </table>
         </div>
-
-    </div>
 
       <footer>
         <p>&copy; 2016 BeerBase, Inc.</p>
