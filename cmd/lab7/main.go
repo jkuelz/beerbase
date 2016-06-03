@@ -187,19 +187,6 @@ func main() {
 				return
 			}
 
-			// userArray := getReviewerAccs()
-			// var isAccount bool = false
-			// for index, user := range userArray {
-			// 	if (username == user.Username) && (password == user.Password) {
-			// 			isAccount := true
-			// 	}
-			// }
-			// if isAccount {
-			// 	c.JSON(http.StatusOK, gin.H{"username":username, "password":password})
-			// } else {
-			// 	c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Failed username password combination"})
-			// }
-
 			rows, err := db.Query("SELECT ReviewerAcc.username FROM ReviewerAcc WHERE ReviewerAcc.Username = $1 AND ReviewerAcc.Password = $2;", username, password)
 			if err != nil {
 				c.AbortWithError(http.StatusInternalServerError, err)
@@ -235,25 +222,23 @@ func main() {
 			// 	c.JSON(http.StatusOK, gin.H{"result": "success", "username": resultUser})
 			// }
 	})
-	// router.POST("/addreview", func(c *gin.Context) {
-	// 		user := c.PostForm("ReviewerID")
-	// 		beer := c.PostForm("BeerID")
-	// 		rating := c.PostForm("Rating")
-	// 		description := c.PostForm("ReviewDescription")
-	// 		rows, err := db.Query("INSERT INTO review (ReviewerID, BeerID, Rating, ReviewDescription) VALUES(1, $1, $2, $3)", user, beer, rating, description)
-	// 		if errd != nil {
-	// 			c.AbortWithError("Error opening database: %q", errd)
-	// 			return
-	// 		}
-	//
-	// 		c.JSON(200, gin.H{
-	// 				"status":  "posted",
-	// 				"message": message,
-	// 				"beer":    beer,
-	// 				"user": user,
-	// 				"rating": rating,
-	// 		})
-	// })
+	router.POST("/addreview", func(c *gin.Context) {
+			// user := c.PostForm("ReviewerID")
+			// beer := c.PostForm("BeerID")
+			title := c.PostForm("Title")
+			rating := c.PostForm("Rating")
+			description := c.PostForm("ReviewDescription")
+			_, err := db.Query("INSERT INTO Review (id, ReviewerID, BeerID, Rating, Title, ReviewDescription, ReviewDate) VALUES((SELECT ISNULL(MAX(ID) + 1, 1) FROM Review), 1, 1, $1, $2, $3, (GETDATE()))", rating, title, description)
+			if err != nil {
+				c.AbortWithError(http.StatusInternalServerError, errd)
+				return
+			}
+
+			c.JSON(http.StatusOK, gin.H{
+					"result":  "success",
+					"message": "Successfully added.",
+			})
+	})
 
 
 	// NO code should go after this line. it won't ever reach that point

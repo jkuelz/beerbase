@@ -26,15 +26,9 @@ $(function(){
     //     $("#firstQuery").append(data);
     // }, "html")
 
-
-    // function submitreview() {
-    //   $.post("/addreview", function(submitreview){
-    //     var rating = review.get('Rating');
-    //     var description = review.get('ReviewDescription');
-    //     var author = review.get('ReviewerID');
-    //
-    //   })
-    // }
+    $("#submitReview").click(function(){
+      submitReview();
+    }
 
     // $.get("/ping", function(data){
     //     if(data.error == "true"){
@@ -51,8 +45,13 @@ $(function(){
             console.log(data)
             $("#result").text("Logged in as: " + data.username + ":" + data.password)
           }
-
         });
-
     });
+
+    function submitReview() {
+      $.post("/addreview", {title: $("#Title").val(), Rating: $("#Rating").val(), reviewdescription: $("#ReviewDescription").val()})
+      .done(function(data){
+          console.log(data)
+      })
+    }
 })
