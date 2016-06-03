@@ -154,6 +154,11 @@ func indexHandler(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", context)
 }
 
+func hasIllegalSyntax(s string) bool {
+	s = strings.ToUpper(s)
+	return strings.Contains(s, "INSERT") || strings.Contains(s, "DELETE") || strings.Contains(s, "CREATE") || strings.Contains(s, "DROP") || strings.Contains(s, "UPDATE") || strings.Contains(s, "ALTER")
+}
+
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -177,10 +182,11 @@ func main() {
 			username := c.PostForm("username")
 			password := c.PostForm("password")
 
-			// if hasIllegalSyntax(username) || hasIllegalSyntax(password) {
-			// 	c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Don't use syntax that isn't allowed"})
-			// 	return
-			// }
+			if hasIllegalSyntax(username) || hasIllegalSyntax(password) {
+				c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Don't use syntax that isn't allowed"})
+				return
+			}
+
 			// userArray := getReviewerAccs()
 			// var isAccount bool = false
 			// for index, user := range userArray {
@@ -193,7 +199,8 @@ func main() {
 			// } else {
 			// 	c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Failed username password combination"})
 			// }
-			rows, err := db.Query("SELECT Username FROM ReviewerAcc WHERE Username = $1 AND Password = $2;", username, password)
+
+			rows, err := db.Query("SELECT ReviewerAcc.username FROM ReviewerAcc WHERE ReviewerAcc.Username = $1 AND ReviewerAcc.Password = $2;", username, password)
 			if err != nil {
 				c.AbortWithError(http.StatusInternalServerError, err)
 				return
@@ -219,9 +226,8 @@ func main() {
 				c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Wrong password/username!"})
 				return
 			}
-			if rowCount == 1 {
-				c.JSON(http.StatusOK, gin.H{"result": "success", "username": resultUser})
-			}
+
+			c.JSON(http.StatusOK, gin.H{"result": "success", "username": resultUser})
 
 			// if resultUser == "Cameron" {
 			// 	c.JSON(http.StatusOK, gin.H{"result": "success", "username": resultUser, "randomCode": rand.Int()})
@@ -271,7 +277,3 @@ router.GET("/EXAMPLE", func(c *gin.Context) {
 })
 
 */
-func hasIllegalSyntax(s string) bool {
-	s = strings.ToUpper(s)
-	return strings.Contains(s, "INSERT") || strings.Contains(s, "DELETE") || strings.Contains(s, "CREATE") || strings.Contains(s, "DROP") || strings.Contains(s, "UPDATE") || strings.Contains(s, "ALTER")
-}
