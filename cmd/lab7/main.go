@@ -231,11 +231,7 @@ func main() {
 				c.AbortWithError(http.StatusInternalServerError, errd)
 				return
 			}
-			
-			c.JSON(http.StatusOK, gin.H{
-					"result":  "success",
-					"message": "Successfully added.",
-			})
+			c.JSON(http.StatusOK, gin.H{ "result":  "success", "message": "Successfully added."})
 	})
 
 
