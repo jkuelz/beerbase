@@ -49,7 +49,7 @@ $(function(){
     });
 
     function submitReview() {
-      $.post("/addreview", {title: $("#Title").val(), rating: $("#Rating").val(), description: $("#ReviewDescription").val()})
+      $.post("/addreview", {title: $("#Title").val(), Rating: $("#Rating").val(), reviewdescription: $("#ReviewDescription").val()})
       .done(function(data){
           console.log(data)
       })
