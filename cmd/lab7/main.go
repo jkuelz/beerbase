@@ -36,15 +36,13 @@ type Review struct {
 }
 
 // Example for binding JSON ({"user": "manu", "password": "123"})
-    router.POST("/auth", func(c *gin.Context) {
+    router.POST("/login", func(c *gin.Context) {
 			username := c.PostForm("username")
 			password := c.PostForm("password")
 			if hasIllegalSyntax(username) || hasIllegalSyntax(password) {
 			c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Don't use syntax that isn't allowed"})
 			return
 		}
-
-			c.JSON(http.StatusUnauthorized, gin.H{"status": username,"pass":password})
 
         var json Login
         if c.BindJSON(&json) == nil {
