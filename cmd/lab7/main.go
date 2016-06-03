@@ -72,6 +72,32 @@ func getFeaturedBeer() []Beer {
 	return beerArray
 }
 
+// func getReviews() []AllReviews {
+// 	var reviewsArray []AllReviews
+// 	rows, err := db.Query("SELECT rating, ReviewDescription, from Reviews order by date()")
+// 	if err != nil {
+// 		return nil
+// 	}
+//
+// 	for rows.Next() {
+// 		// for each row, we create an empty Location object
+//
+// 		var review Reviews
+//
+// 		// go can scan the columns returned from the select directly into the properties from our object
+// 		// we need &loc.xxx so that scan can update the properties in memory (&loc.Name means address of the Name property for this instance of loc)
+// 		err = rows.Scan(&review.id, &review.ReviewDescription)
+// 		if err != nil {
+// 			return nil
+// 		}
+// 		// append each intermediate loc to our array
+// 		reviewsArray = append(reviewsArray, review)
+// 	}
+// 	rows.Close()
+//
+// 	return reviewsArray
+// }
+
 // func beerHandler(c *gin.Context) {
 // 	beerName := c.Param("id")
 // 	beerDetail := getBeerDetails(beerName)
@@ -86,14 +112,15 @@ func getFeaturedBeer() []Beer {
 
 func indexHandler(c *gin.Context) {
 	favoriteBeers := getFeaturedBeer()
+  //allReviews := getReviews()
 
 	context := struct {
 		Favorites []Beer
-		//AllReviews []Review
+		//Reviews []Review
 
 	}{
 		favoriteBeers,
-		// topReviews,
+		//allReviews,
 	}
 	c.HTML(http.StatusOK, "index.html", context)
 }
@@ -136,32 +163,6 @@ func main() {
 	// 				"rating": rating,
 	// 		})
 	// })
-
-	// func getReviews() []AllReviews {
-	// 	var reviewsArray []AllReviews
-	// 	rows, err := db.Query("SELECT ID, Author, Content from Reviews order by date()")
-	// 	if err != nil {
-	// 		return nil
-	// 	}
-	//
-	// 	for rows.Next() {
-	// 		// for each row, we create an empty Location object
-	//
-	// 		var review Reviews
-	//
-	// 		// go can scan the columns returned from the select directly into the properties from our object
-	// 		// we need &loc.xxx so that scan can update the properties in memory (&loc.Name means address of the Name property for this instance of loc)
-	// 		err = rows.Scan(&review.id, &review.ReviewDescription)
-	// 		if err != nil {
-	// 			return nil
-	// 		}
-	// 		// append each intermediate loc to our array
-	// 		reviewsArray = append(reviewsArray, review)
-	// 	}
-	// 	rows.Close()
-	//
-	// 	return reviewsArray
-	// }
 
 
 	// NO code should go after this line. it won't ever reach that point
