@@ -79,16 +79,15 @@
 
         <div id="listReview" class="container">
             <h1> Review test </h1>
-            {{ range .Reviews }}
-            <!--<div class="row" id="{{ .Id }}">
-              <h3>{{ .ReviewDate }}</h3>
-              <h3>{{ .Rating }}</h3>
-              <p>{{ .ReviewDescription }}</p>
-            </div>-->
-            <h3>{{ .ReviewDate }}</h3>
-            <h3>{{ .Rating }}</h3>
-            <p>{{ .ReviewDescription }}</p>
-            {{ end }}
+            <table>
+              {{ range .Reviews }}
+                <tr>
+                  <th>{{ .ReviewDate }}</th>
+                  <th>{{ .Rating }}</th>
+                  <th>{{ .ReviewDescription }}</th>
+                </tr>
+              {{ end }}
+            </table>
         </div>
 
     </div>
