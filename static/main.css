@@ -36,9 +36,9 @@ form {
 	background-color: whitesmoke;
 }
 
-/*.formInput {
-	background-color: whitesmoke;
-}*/
+.formInput {
+	width: auto;
+}
 
 #review-content {
 	border-left: 3px solid;
