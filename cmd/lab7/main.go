@@ -193,7 +193,7 @@ func main() {
 			// } else {
 			// 	c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Failed username password combination"})
 			// }
-			rows, err := db.Query("SELECT username FROM ReviewerAcc WHERE username = $1 AND password = $2;", username, password)
+			rows, err := db.Query("SELECT Username FROM ReviewerAcc WHERE Username = $1 AND Password = $2;", username, password)
 			if err != nil {
 				c.AbortWithError(http.StatusInternalServerError, err)
 				return
