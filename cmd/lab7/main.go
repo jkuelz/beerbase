@@ -148,7 +148,7 @@ func main() {
 					c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Don't use syntax that isn't allowed"})
 					return
 				}
-				c.JSON(http.StatusOK, gin.H{"email":email, "password": "worked":password})
+				c.JSON(http.StatusOK, gin.H{"email":email, "password":password})
 	    })
 	// router.POST("/addreview", func(c *gin.Context) {
 	// 		user := c.PostForm("ReviewerID")
