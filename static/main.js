@@ -49,7 +49,7 @@ $(function(){
             $("#result").text("Failed to login! " + data.message);
           } else {
             console.log(data)
-            $("#result").text("Logged in as: " + data.username + (data.randomCode ? " (CODE: " + data.randomCode + ")" : ""));
+            $("#result").text("Logged in as: " + data.email + ":" + data.password)
           }
 
         });
