@@ -173,27 +173,62 @@ func main() {
 
 	router.GET("/", indexHandler)
 	// Example for binding JSON ({"user": "manu", "password": "123"})
-	    router.POST("/login", func(c *gin.Context) {
-				username := c.PostForm("username")
-				password := c.PostForm("password")
+	router.POST("/login", func(c *gin.Context) {
+			username := c.PostForm("username")
+			password := c.PostForm("password")
 
-				if hasIllegalSyntax(username) || hasIllegalSyntax(password) {
-					c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Don't use syntax that isn't allowed"})
-					return
-				}
-				userArray := getReviewerAccs()
-				var isAccount bool = false
-				for index, user := range userArray {
-					if (username == user.Username) && (password == user.Password) {
-						isAccount := true
-					}
-				}
-				if isAccount{
-					c.JSON(http.StatusOK, gin.H{"username":username, "password":password})
-				} else {
-					c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Failed username password combination"})
-				}
-	    })
+			// if hasIllegalSyntax(username) || hasIllegalSyntax(password) {
+			// 	c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Don't use syntax that isn't allowed"})
+			// 	return
+			// }
+			// userArray := getReviewerAccs()
+			// var isAccount bool = false
+			// for index, user := range userArray {
+			// 	if (username == user.Username) && (password == user.Password) {
+			// 			isAccount := true
+			// 	}
+			// }
+			// if isAccount {
+			// 	c.JSON(http.StatusOK, gin.H{"username":username, "password":password})
+			// } else {
+			// 	c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Failed username password combination"})
+			// }
+			rows, err := db.Query("SELECT username FROM ReviewerAcc WHERE username = $1 AND password = $2;", username, password)
+			if err != nil {
+				c.AbortWithError(http.StatusInternalServerError, err)
+				return
+			}
+			cols, _ := rows.Columns()
+			if len(cols) == 0 {
+				c.AbortWithStatus(http.StatusNoContent)
+				return
+			}
+
+			rowCount := 0
+			var resultUser string
+			for rows.Next() {
+				rows.Scan(&resultUser)
+				rowCount++
+			}
+			if rowCount > 1 {
+				c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Too many users returned!"})
+				return
+			}
+			// quick way to check if the user logged in properly
+			if rowCount == 0 {
+				c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Wrong password/username!"})
+				return
+			}
+			if rowCount == 1 {
+				c.JSON(http.StatusOK, gin.H{"result": "success", "username": resultUser})
+			}
+
+			// if resultUser == "Cameron" {
+			// 	c.JSON(http.StatusOK, gin.H{"result": "success", "username": resultUser, "randomCode": rand.Int()})
+			// } else {
+			// 	c.JSON(http.StatusOK, gin.H{"result": "success", "username": resultUser})
+			// }
+	})
 	// router.POST("/addreview", func(c *gin.Context) {
 	// 		user := c.PostForm("ReviewerID")
 	// 		beer := c.PostForm("BeerID")
