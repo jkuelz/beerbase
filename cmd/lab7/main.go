@@ -72,17 +72,17 @@ func getFeaturedBeer() []Beer {
 	return beerArray
 }
 
-// func beerHandler(c *gin.Context) {
-// 	beerName := c.Param("id")
-// 	beerDetail := getBeerDetails(beerName)
-// 	context := struct {
-// 		Detail Beer `json:"detail"`
-//
-// 	}{
-// 		beerDetail,
-// 	}
-// 	c.JSON(200,context)
-// }
+func beerHandler(c *gin.Context) {
+	beerName := c.Param("id")
+	beerDetail := getBeerDetails(beerName)
+	context := struct {
+		Detail Beer `json:"detail"`
+
+	}{
+		beerDetail,
+	}
+	c.JSON(200,context)
+}
 
 func indexHandler(c *gin.Context) {
 	favoriteBeers := getFeaturedBeer()
