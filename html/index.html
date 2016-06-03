@@ -64,7 +64,7 @@
 
       <hr>
 
-      <div id="createReview" class="container">
+        <div id="createReview" class="container">
             <h2>Create a review for this beer:</h2>
             <form id="reviewForm">
                 <input class="formInput" type="text" name="reviewRating" id="Rating" size="50" autocorrect="off" placeholder="Title of your review"><br>
@@ -83,6 +83,16 @@
           <p>{{ .ReviewDescription }}Description</p>
         </div>
         {{ end }} -->
+        <div class="row">
+          {{ range .Favorites }}
+          <div class="col-md-4" id="{{ .Id }}">
+            <h2>{{ .Name }}</h2>
+            <p>{{ .BeerDescription }} </p>
+            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          </div>
+          {{ end }}
+        </div>
+
     </div>
 
       <footer>
