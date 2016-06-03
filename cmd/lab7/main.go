@@ -36,7 +36,7 @@ type Review struct {
 }
 
 // Example for binding JSON ({"user": "manu", "password": "123"})
-    router.POST("/login", func(c *gin.Context) {
+    router.POST("/login", func(c *gin.Context)) {
 			email := c.PostForm("email")
 			password := c.PostForm("password")
 
@@ -79,7 +79,7 @@ type Review struct {
 			// } else {
 			// 	c.JSON(http.StatusOK, gin.H{"result": "success", "username": resultUser})
 			// }
-    })
+    }
 
 func getFeaturedBeer() []Beer {
 	var beerArray []Beer
