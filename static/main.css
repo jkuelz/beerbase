@@ -37,7 +37,8 @@ form {
 }
 
 .formInput {
-	width: 75%;
+	width: 80%;
+  min-width: 280px;
 }
 
 #review-content {
