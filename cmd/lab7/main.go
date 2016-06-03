@@ -228,7 +228,7 @@ func main() {
 			title := c.PostForm("Title")
 			rating := c.PostForm("Rating")
 			description := c.PostForm("ReviewDescription")
-			_, err := db.Query("INSERT INTO review (id, ReviewerID, BeerID, Rating, Title, ReviewDescription, GETDATE()) VALUES((SELECT ISNULL(MAX(ID) + 1, 1) FROM Review), 1, 1, $1, $2, $3)", title, rating, description)
+			_, err := db.Query("INSERT INTO review (id, ReviewerID, BeerID, Rating, Title, ReviewDescription, ReviewDate) VALUES((SELECT ISNULL(MAX(ID) + 1, 1) FROM Review), 1, 1, $1, $2, $3, (GETDATE()))", title, rating, description)
 			if err != nil {
 				c.AbortWithError(http.StatusInternalServerError, errd)
 				return
@@ -236,7 +236,7 @@ func main() {
 
 			c.JSON(http.StatusOK, gin.H{
 					"result":  "success",
-					"message": "Successfully added, restart the page to see your review.",
+					"message": "Successfully added.",
 			})
 	})
 
