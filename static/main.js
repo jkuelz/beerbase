@@ -14,11 +14,11 @@ $(function(){
     //         $("#results").prepend("<div class='alert alert-danger'><strong>Error!</strong> "+ data.message +"</div>");
     //     }
     // }, "json")
-
-    $.get("/user?id="+$.urlParam('id'), function(data){
-      var id = $.urlParam('id');
-        $("#firstQuery").append(data);
-    }, "html")
+// user param
+    // $.get("/user?id="+$.urlParam('id'), function(data){
+    //   var id = $.urlParam('id');
+    //     $("#firstQuery").append(data);
+    // }, "html")
 
     // $.get("/login?user="+$.urlParam('user')+"&pass="+$.urlParam('pass'), function(data){
     //   var user = $.urlParam('user');
