@@ -27,7 +27,7 @@ $(function(){
     // }, "html")
 
     $("#submitReview").click(function(){
-      submitReview();
+      submitReview()
     }
 
     // $.get("/ping", function(data){
