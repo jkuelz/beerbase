@@ -33,6 +33,8 @@ form {
 	padding-top: 15px;
 	padding-bottom: 15px;
 	border-radius: 5px;
+  width: 80%;
+  min-width: 380px;
 	background-color: whitesmoke;
 }
 
