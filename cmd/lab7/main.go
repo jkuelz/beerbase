@@ -8,7 +8,8 @@ import (
 	"database/sql"
 	"log"
 	"net/http"
-	"os"
+	"os",
+	"strings"
 
 	// this allows us to run our web server
 	"github.com/gin-gonic/gin"
