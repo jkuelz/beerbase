@@ -26,7 +26,7 @@ $(function(){
     //     $("#firstQuery").append(data);
     // }, "html")
 
-    $("#submitReview").click(function(){
+    $("#submitreview").click(function(){
       submitReview();
     })
 
