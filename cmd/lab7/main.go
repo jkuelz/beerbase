@@ -99,6 +99,12 @@ func getReviews() []Review {
 	return reviewsArray
 }
 
+func trunArray() []Review {
+	var reviewsArray = getReviews()
+	var trunArray []Review = reviewsArray[1:10]
+	return trunArray
+}
+
 // func beerHandler(c *gin.Context) {
 // 	beerName := c.Param("id")
 // 	beerDetail := getBeerDetails(beerName)
@@ -113,7 +119,7 @@ func getReviews() []Review {
 
 func indexHandler(c *gin.Context) {
 	favoriteBeers := getFeaturedBeer()
-  allReviews := getReviews()
+  tenReviews := trunArray()
 
 	context := struct {
 		Favorites []Beer
@@ -121,7 +127,7 @@ func indexHandler(c *gin.Context) {
 
 	}{
 		favoriteBeers,
-		allReviews,
+		tenReviews,
 	}
 	c.HTML(http.StatusOK, "index.html", context)
 }
