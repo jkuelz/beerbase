@@ -26,6 +26,27 @@ $(function(){
     //     $("#firstQuery").append(data);
     // }, "html")
 
+
+    // function submitreview() {
+    //   $.post("/addreview", function(submitreview){
+    //     var rating = review.get('Rating');
+    //     var description = review.get('ReviewDescription');
+    //     var author = review.get('ReviewerID');
+    //
+    //   })
+    // }
+
+    function submitreview() {
+      $.post("/addtrip, {rating: $(#rating).val(), description: $(#ReviewDescription).val()}")
+      .done(function(data)){
+        console.log(data);
+      }
+    }
+
+    $("#submitreview").click(function(){
+      submitreview();
+    })
+
     $.get("/query2", function(data){
         $("#secondQuery").append(data);
     }, "html")
