@@ -30,11 +30,12 @@ $(function(){
       submitReview();
     })
 
-    // $.get("/ping", function(data){
-    //     if(data.error == "true"){
-    //         $("#results").prepend("<div class='alert alert-danger'><strong>Error!</strong> "+ data.message +"</div>");
-    //     }
-    // }, "json")
+    $.get("/ping", function(data){
+        if(data.error == "true"){
+            $("#results").prepend("<div class='alert alert-danger'><strong>Error!</strong> "+ data.message +"</div>");
+        }
+    }, "json")
+    
     $("#login").click(function(){
       $.post("/login", {username: $("#username").val(), password: $("#password").val()})
         .done(function(data){
