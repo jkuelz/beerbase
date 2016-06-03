@@ -39,7 +39,7 @@ type Review struct {
     router.POST("/auth", func(c *gin.Context, req *http.Request) {
 			email := r.URL.Query().Get("email")
 			pass := r.URL.Query().Get("pass")
-			c.JSON(http.StatusUnauthorized, gin.H{"status": email,"pass":pass})
+			c.JSON(http.StatusUnauthorized, gin.H{"status": email,"pass":pass}
 
         var json Login
         if c.BindJSON(&json) == nil {
