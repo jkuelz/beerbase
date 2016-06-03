@@ -230,7 +230,7 @@ func main() {
 			description := c.PostForm("ReviewDescription")
 			_, err := db.Query("INSERT INTO review (id, ReviewerID, BeerID, Rating, Title, ReviewDescription, GETDATE()) VALUES((SELECT ISNULL(MAX(ID) + 1, 1) FROM Review), 1, 1, $1, $2, $3)", title, rating, description)
 			if err != nil {
-				c.AbortWithError("http.StatusInternalServerError", errd)
+				c.AbortWithError(http.StatusInternalServerError, errd)
 				return
 			}
 
