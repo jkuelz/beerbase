@@ -39,43 +39,46 @@ type Review struct {
     router.POST("/login", func(c *gin.Context) {
 			email := c.PostForm("email")
 			password := c.PostForm("password")
-			if hasIllegalSyntax(username) || hasIllegalSyntax(password) {
+
+			if hasIllegalSyntax(email) || hasIllegalSyntax(password) {
 				c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Don't use syntax that isn't allowed"})
 				return
 			}
-			// SQL injection in password only
-			rows, err := db.Query("SELECT ReviewerAcc.email FROM usert.email WHERE usert.email = '" + usernsame + "';")
-			if err != nil {
-				c.AbortWithError(http.StatusInternalServerError, err)
-				return
-			}
-			cols, _ := rows.Columns()
-			if len(cols) == 0 {
-				c.AbortWithStatus(http.StatusNoContent)
-				return
-			}
+			c.JSON(http.StatusOK, gin.H{"result": "worked", "message": "worked"})
 
-			rowCount := 0
-			var resultUser string
-			for rows.Next() {
-				rows.Scan(&resultUser)
-				rowCount++
-			}
-			if rowCount > 1 {
-				c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Too many users returned!"})
-				return
-			}
-			// quick way to check if the user logged in properly
-			if rowCount == 0 {
-				c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Wrong password/username!"})
-				return
-			}
-
-			if resultUser == "admin" {
-				c.JSON(http.StatusOK, gin.H{"result": "success", "username": resultUser, "randomCode": rand.Int()})
-			} else {
-				c.JSON(http.StatusOK, gin.H{"result": "success", "username": resultUser})
-			}
+			// // SQL injection in password only
+			// rows, err := db.Query("SELECT ReviewerAcc.email FROM usert.email WHERE usert.email = '" + usernsame + "';")
+			// if err != nil {
+			// 	c.AbortWithError(http.StatusInternalServerError, err)
+			// 	return
+			// }
+			// cols, _ := rows.Columns()
+			// if len(cols) == 0 {
+			// 	c.AbortWithStatus(http.StatusNoContent)
+			// 	return
+			// }
+			//
+			// rowCount := 0
+			// var resultUser string
+			// for rows.Next() {
+			// 	rows.Scan(&resultUser)
+			// 	rowCount++
+			// }
+			// if rowCount > 1 {
+			// 	c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Too many users returned!"})
+			// 	return
+			// }
+			// // quick way to check if the user logged in properly
+			// if rowCount == 0 {
+			// 	c.JSON(http.StatusOK, gin.H{"result": "failed", "message": "Wrong password/username!"})
+			// 	return
+			// }
+			//
+			// if resultUser == "admin" {
+			// 	c.JSON(http.StatusOK, gin.H{"result": "success", "username": resultUser, "randomCode": rand.Int()})
+			// } else {
+			// 	c.JSON(http.StatusOK, gin.H{"result": "success", "username": resultUser})
+			// }
     })
 
 func getFeaturedBeer() []Beer {
