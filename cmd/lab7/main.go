@@ -9,7 +9,7 @@ import (
 	"log"
 	"net/http"
 	"os",
-	"strings"
+	"strings",
 
 	// this allows us to run our web server
 	"github.com/gin-gonic/gin"
