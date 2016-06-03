@@ -238,7 +238,7 @@ func main() {
 			// }
 	})
 
-	router.POST("/addreview", func(c *gin.Context) {
+	router.POST("/submitreview", func(c *gin.Context) {
 			rating := c.PostForm("rating")
 			title := c.PostForm("title")
 			reviewDescription := c.PostForm("reviewDescription")

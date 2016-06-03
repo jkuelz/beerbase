@@ -28,7 +28,7 @@ $(function(){
 
     $("#submitreview").click(function(){
       // submitReview();
-      $.post("/addreview", {rating: $("#rating").val(), title: $("#title").val(), description: $("#reviewDescription").val()})
+      $.post("/submitreview", {rating: $("#rating").val(), title: $("#title").val(), description: $("#reviewDescription").val()})
       .done(function(data){
           console.log(data)
       })
