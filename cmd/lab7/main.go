@@ -226,12 +226,10 @@ func main() {
 			description := c.PostForm("description")
 
 			_, err := db.Query("INSERT INTO Review(id, ReviewerID, BeerID, Rating, Title, ReviewDescription, ReviewDate) VALUES((SELECT (MAX(ID) + 1) FROM Review), 1, 1, $1, $2, $3, (current_date)", rating, title, description)
-			// if err != nil {
-			// 	c.AbortWithError(http.StatusInternalServerError, errd)
-			// 	return
-			// }
-			log.println(err)
-
+			if err != nil {
+				c.AbortWithError(http.StatusInternalServerError, errd)
+				return
+			}
 			c.JSON(http.StatusOK, gin.H{"result":  "success", "message": "Successfully added."})
 	})
 
