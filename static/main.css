@@ -43,14 +43,6 @@ form {
   min-width: 280px;
 }
 
-#review-content {
-	border-left: 3px solid;
-	padding-left: 5px;
-	border-left-color: darkgray;
-	margin-top: 15px;
-	margin-bottom: 15px;
-}
-
 .prevReview {
 	border: 1px solid;
 	margin: 15px;

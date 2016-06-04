@@ -82,20 +82,9 @@
             </form>
         </div>
 <br>
-        <!-- <h1 class="reviewArchive">Previous Reviews</h1> -->
-<!--        <div id="oldReviews"></div><br>-->
 
         <div id="listReview" class="container">
             <h2>Recent Reviews:</h2>
-            <!-- <table>
-              {{ range .Reviews }}
-                <tr>
-                  <th>{{ .ReviewDate }}</th>
-                  <th>{{ .Rating }}</th>
-                  <th>{{ .ReviewDescription }}</th>
-                </tr>
-              {{ end }}
-            </table> -->
             <div class="container">
               {{ range .Reviews }}
               <div class="prevReview">
@@ -118,41 +107,3 @@
 
   </body>
 </html>
-
-
-  <!-- <header>
-            <h1>Beerbase</h1>
-            <h3>Search a database of beer!</h3>
-        </header>
-        <div class="content" id="results">
-            <div class="row">
-                <div class="col-md-4" id="firstQuery">
-                    <!-- replace the content in the p block with your question
-                    <p>
-                      Login:
-                      <form action="login">
-                        Username: <input type="text" name="user"><br>
-                        Password: <input type="text" name="pass"><br>
-                        <input type="submit" value="Submit">
-                      </form>
-                    </p>
-                </div>
-                <div class="col-md-4" id="secondQuery">
-                    <!-- <p>
-                      <form name="beerSearch" class="row form-inline">
-                      	    	<div class="pull-right searchBar">
-                      				<label for="search"><i class="fa fa-search"></i></label>
-                      				<input name="query2" placeholder="Search" id="search" ng-model="searchQuery">
-                      			</div>
-                      	    </form>
-                   </p>
-                </div>
-                <div class="col-md-4" id="thirdQuery">
-                    <p>
-                        <!--Put question #3 here
-                    </p>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>-->
