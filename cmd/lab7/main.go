@@ -232,19 +232,16 @@ func main() {
 
 			c.JSON(http.StatusOK, gin.H{"result": "success", "username": resultUser})
 
-			// if resultUser == "Cameron" {
-			// 	c.JSON(http.StatusOK, gin.H{"result": "success", "username": resultUser, "randomCode": rand.Int()})
-			// } else {
-			// 	c.JSON(http.StatusOK, gin.H{"result": "success", "username": resultUser})
-			// }
 	})
 	router.POST("/addreview", func(c *gin.Context) {
 			rating := c.PostForm("rating")
 			title := c.PostForm("title")
 			reviewDescription := c.PostForm("reviewDescription")
-			_, err := db.Exec("INSERT INTO Review(id, ReviewerID, BeerID, Rating, Title, ReviewDescription, ReviewDate) VALUES((SELECT (MAX(ID) + 1) FROM Review), 1, 1, $1, $2, $3, (current_date)", rating, title, reviewDescription)
+			log.Println(c.PostForm("rating") + ", "+ c.PostForm("title") + ", "+ c.PostForm("reviewDescription"))
+			_, err := db.Exec("INSERT INTO Review(id, ReviewerID, BeerID, Rating, Title, ReviewDescription, ReviewDate) VALUES((SELECT (MAX(id) + 1) FROM Review), 1, 1, $1, $2, $3, (current_date)", rating, title, reviewDescription)
 			if err != nil {
-				c.AbortWithError(http.StatusInternalServerError, errd)
+				log.Println(err)
+				c.AbortWithError(http.StatusInternalServerError, err)
 				return
 			}
 			c.JSON(http.StatusOK, gin.H{"result":  "success", "message": "Successfully added."})
