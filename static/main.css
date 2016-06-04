@@ -50,3 +50,12 @@ form {
 	margin-top: 15px;
 	margin-bottom: 15px;
 }
+
+.prevReview {
+	border: 1px solid;
+	margin: 15px;
+	padding-left: 10px;
+	background-color: lightgrey;
+	border-radius: 5px;
+  width: 70%;
+}

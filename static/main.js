@@ -46,8 +46,11 @@ $(function(){
             console.log(data)
             $("#result").text("Failed to login! " + data.message);
           } else {
+            $("#username").hide();
+            $("#password").hide();
+            $("#login").hide();
             console.log(data)
-            $("#result").text("Logged in as: " + data.username + ":" + data.password)
+            $("#result").text("Logged in as: " + data.username)
           }
         });
     });

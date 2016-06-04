@@ -31,7 +31,7 @@
               <input type="text" class="form-control" id="username" placeholder="Username" />
               <input type="password" class="form-control" id="password" placeholder="Password"/>
               <button class="btn" id="login">Log in</button>
-              <p style="color: whitesmoke" id="result"></p>
+              <h4 style="color: whitesmoke" id="result"></h4>
             </div>
           </div><!--/.navbar-collapse -->
         </div>
@@ -63,7 +63,8 @@
         <div id="createReview" class="container">
             <h2>Create a review for this beer:</h2>
             <form id="reviewForm">
-                <input class="formInput form-group" type="text" id="title" autocorrect="off" placeholder="Title of your review"><br>
+                <label for="title">Title</label>
+                <input class="formInput form-control" type="text" id="title" autocorrect="off" placeholder="Title your review"><br>
                 <fieldset class="form-group formInput">
                     <label for="rating">Rating</label>
                     <select class="form-control" id="rating">
@@ -75,17 +76,18 @@
                     </select>
                   </fieldset>
                 <!-- <input class="formInput form-group" type="text" id="Rating" autocorrect="off" placeholder="Rating of your review"><br> -->
-                <textarea class="formInput form-group" id="reviewDescription" rows="3" placeholder="Review description..."></textarea><br>
+                <label for="reviewDescription">Review</label>
+                <textarea class="formInput form-control" id="reviewDescription" rows="3" placeholder="What did you think?"></textarea><br>
                 <button class="btn btn-info" id="submitreview" type="submit">Submit</button>
             </form>
         </div>
-
+<br>
         <!-- <h1 class="reviewArchive">Previous Reviews</h1> -->
 <!--        <div id="oldReviews"></div><br>-->
 
         <div id="listReview" class="container">
             <h2>Recent Reviews:</h2>
-            <table>
+            <!-- <table>
               {{ range .Reviews }}
                 <tr>
                   <th>{{ .ReviewDate }}</th>
@@ -93,9 +95,18 @@
                   <th>{{ .ReviewDescription }}</th>
                 </tr>
               {{ end }}
-            </table>
+            </table> -->
+            <div class="container">
+              {{ range .Reviews }}
+              <div class="prevReview">
+              <div> {{ .ReviewDate }}</div>
+              <div>{{ .Rating }}</div>
+              <div>{{ .ReviewDescription }}</div>
+            </div>
+              {{ end }}
+            </div>
         </div>
-
+        <br>
       <footer>
         <p>&copy; 2016 BeerBase, Inc.</p>
       </footer>
