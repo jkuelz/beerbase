@@ -31,6 +31,7 @@ $(function(){
       $.post("/addreview", {rating: $("#rating").val(), title: $("#title").val(), description: $("#reviewDescription").val()})
       .done(function(data){
           console.log(data)
+          // $("#listReview").prepend(data);
       })
     })
 

@@ -51,3 +51,23 @@ form {
 	border-radius: 5px;
   width: 70%;
 }
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+  float: left;
+}
+
+.date {
+  float: right;
+  padding-right: 5px;
+}
+
+
+footer {
+	border-top: 3px solid #d87e28;
+	background-color: #afb3c2;
+	font-size: 12px;
+	padding: 1em;
+   margin-top: 1em;
+}

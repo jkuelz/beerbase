@@ -11,7 +11,7 @@
         <title>Beerbase</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
         <link rel="stylesheet" href="static/main.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
     </head>
 
     <body>
@@ -88,9 +88,11 @@
             <div class="container">
               {{ range .Reviews }}
               <div class="prevReview">
-              <div> {{ .ReviewDate }}</div>
-              <div>{{ .Rating }}</div>
-              <div>{{ .ReviewDescription }}</div>
+                <h1 class="title">{{ .Title }}</h1>
+                <h1 class="date">{{ .ReviewDate }}</h1>
+                <div style="clear: both;"></div>
+                <p class="rating">{{ .Rating }} out of 5</p>
+                <p class="body">{{ .ReviewDescription }}</p>
             </div>
               {{ end }}
             </div>
@@ -104,6 +106,5 @@
     <!-- jQuery library -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="static/main.js"></script>
-
   </body>
 </html>
