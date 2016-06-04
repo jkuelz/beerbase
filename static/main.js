@@ -30,9 +30,8 @@ $(function(){
     $("#submitreview").click(function(){
       $.post("/submitreview", {rating: $("#rating").val(), title: $("#title").val(), description: $("#description").val()})
        .done(function(data){
-          console.log(data)
-          $("#result").text("Submitted");
-       })
+          console.log(data);
+       });
     })
 
     $("#login").click(function(){
