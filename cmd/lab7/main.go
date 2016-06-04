@@ -128,18 +128,6 @@ func trunArray() []Review {
 	return trunArray
 }
 
-// func beerHandler(c *gin.Context) {
-// 	beerName := c.Param("id")
-// 	beerDetail := getBeerDetails(beerName)
-// 	context := struct {
-// 		Detail Beer `json:"detail"`
-//
-// 	}{
-// 		beerDetail,
-// 	}
-// 	c.JSON(200,context)
-// }
-
 func indexHandler(c *gin.Context) {
 	favoriteBeers := getFeaturedBeer()
   tenReviews := trunArray()
@@ -191,10 +179,10 @@ func main() {
 		} else {
 			c.JSON(http.StatusOK, gin.H{"error": "false", "message": "db created"})
 		}
-	})
+	 })
 
-	// Example for binding JSON ({"user": "manu", "password": "123"})
-	router.POST("/login", func(c *gin.Context) {
+  	// Example for binding JSON ({"user": "manu", "password": "123"})
+  router.POST("/login", func(c *gin.Context) {
 			username := c.PostForm("username")
 			password := c.PostForm("password")
 
@@ -231,9 +219,9 @@ func main() {
 			}
 
 			c.JSON(http.StatusOK, gin.H{"result": "success", "username": resultUser})
-
 	})
-	router.POST("/addreview", func(c *gin.Context) {
+
+	router.POST("/submitreview", func(c *gin.Context) {
 			rating := c.PostForm("rating")
 			title := c.PostForm("title")
 			reviewDescription := c.PostForm("reviewDescription")

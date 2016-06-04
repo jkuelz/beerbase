@@ -26,6 +26,7 @@ $(function(){
     //     $("#firstQuery").append(data);
     // }, "html")
 
+
     $("#submitreview").click(function(){
       // submitReview();
       $.post("/addreview", {rating: $("#rating").val(), title: $("#title").val(), reviewDescription: $("#reviewDescription").val()})
@@ -35,11 +36,6 @@ $(function(){
       })
     })
 
-    // $.get("/ping", function(data){
-    //     if(data.error == "true"){
-    //         $("#results").prepend("<div class='alert alert-danger'><strong>Error!</strong> "+ data.message +"</div>");
-    //     }
-    // }, "json")
     $("#login").click(function(){
       $.post("/login", {username: $("#username").val(), password: $("#password").val()})
         .done(function(data){
