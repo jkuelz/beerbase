@@ -222,11 +222,10 @@ func main() {
 	})
 
 	router.POST("/addreview", func(c *gin.Context) {
-			// rating := c.PostForm("rating")
-			// title := c.PostForm("title")
-			// reviewDescription := c.PostForm("reviewDescription")
-			log.Println(c.PostForm("rating") + ", "+ c.PostForm("title") + ", "+ c.PostForm("reviewDescription"))
-			_, err := db.Exec("INSERT INTO Review(id, ReviewerID, BeerID, Rating, Title, ReviewDescription, ReviewDate) VALUES((SELECT (MAX(id) + 1) FROM Review), 1, 1, 1, 'test', 'test', (current_date))") //, rating, title, reviewDescription)
+			rating := c.PostForm("rating")
+			title := c.PostForm("title")
+			reviewDescription := c.PostForm("reviewDescription")
+			_, err := db.Exec("INSERT INTO Review(id, ReviewerID, BeerID, Rating, Title, ReviewDescription, ReviewDate) VALUES((SELECT (MAX(id) + 1) FROM Review), 1, 1, $1, $2, $3, (current_date))", rating, title, reviewDescription)
 			if err != nil {
 				log.Println(err)
 				c.AbortWithError(http.StatusInternalServerError, err)
