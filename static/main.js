@@ -29,7 +29,7 @@ $(function(){
 
     $("#submitreview").click(function(){
       // submitReview();
-      $.post("/addreview", {rating: $("#rating").val(), title: $("#title").val(), reviewDescription: $("#reviewDescription").val()})
+      $.post("/submitreview", {rating: $("#rating").val(), title: $("#title").val(), reviewDescription: $("#reviewDescription").val()})
       .done(function(data){
           console.log(data)
           // $("#listReview").prepend(data);
