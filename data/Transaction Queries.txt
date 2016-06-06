@@ -1,0 +1,25 @@
+Adding a new beer
+INSERT INTO beer(id, BreweryID, Name, ABV, IBU, BeerDescription, Cost Calories, Availability) VALUES((SELECT (MAX(id) + 1) FROM beer), $1, $2, $3, $4, $5, $6, $7), name, abv, ibu, beerdescription, cost, calories, availability;
+Adding a new brewer
+INSERT INTO brewery(id, name, address) VALUES ((SELECT (MAX(id) +1) FROM brewery), $1, $2),  name, address;
+Retrieving information about a beer
+SELECT * FROM beer WHERE (name, id, etc.) = searchedfield;
+Retrieving information on a brewer
+SELECT * FROM brewery WHERE (id, name, address) = searchedfield;
+Updating information about a beer
+UPDATE beer SET name = (newname) WHERE name = (oldname);
+Deleting a beer
+DELETE FROM beer WHERE id = (deleteid);
+Adding a favorite
+Deleting a favorite
+Editing a favorite
+Editing a brewer
+Creating a profile
+Editing your profile
+Check birthday (21)
+SELECT CASE WHEN EXISTS (SELECT * FROM user WHERE id = (userid) AND birthdate < DATEADD(year, -21, GETDATE()))
+THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END
+Aggregate beer rating score
+SELECT AVG(rating) FROM review WHERE beerid = (selected beer id);
+Aggregate brewer rating score
+SELECT AVG(rating) FROM review JOIN beer ON beerid = beer.id WHERE beer.brewerid = (selected brewer id);
